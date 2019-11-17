@@ -1,33 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="./lindura.css">
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    <title>Mc Donalds</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
-
-    <script src="./eventos.js"></script>
-
-    <title>restaurante</title>
+    <script src="eventos.js"></script>
 </head>
 <body>
-    <div class="deslizador">
-     <h1>Servicios</h1>
-        <ul>
-            <li>Inicio</li>
-            <li>Cajas</li>
-            <li>Ordenar</li>
-            <li>Cocina</li>
-            <li>Sobre nosotros</li>
-        </ul>
+    <div  class="contenedor">
+    <ul class='pestanas'>
+        <li><a hrf="#pes1"><span class="">agregar menu</span></a></li>
+        <li><a hrf="#pes2"><span>menu</span></a></li>
+        <li><a hrf="#pes3"><span>cocina</span></a></li>
+    </ul>
+    
+
+    <div class="secciones">
     </div>
-    <div class="contenedor">
-               
-        <img class='img' src="data:image/png;base64,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">
     </div>
-    <script src="./eventos.js"></script>
+
 </body>
 </html>
