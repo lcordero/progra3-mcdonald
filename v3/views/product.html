@@ -4,14 +4,16 @@
     <br>
     <button>Menu</button>
     <input class="prod_name" placeholder="ProductName" />
-    <!--input class="prod_price" placeholder="ProductPrice" /-->
+    <input class="prod_price" placeholder="ProductPrice">
+    <input class="prod_cantidad" placeholder="ProductCantidad">
     <button class="send">Enviar</button>
-    <nav><a href="cocina.html">Cocina</a><nav>
+    <nav><a href="product2.html">Cocina</a><nav>
     <table style="width:100%" class="data_table">
         <thead class="header">
             <tr>
               <th>ProdName</th>
               <th>ProdPrice</th>
+              <th>ProdCantidad</th>
             </tr>
         </thead>
       <tbody class="table_content">
@@ -39,7 +41,9 @@
             <tr>
             <th>`+ product.name +`</th>
             <th>`+ product.price +`</th>
+            <th>`+ ProdCantidad +`</th>
             </tr>
+            
         `)
     });
 
@@ -55,7 +59,8 @@
 
         $.post("http://localhost:3001/api/product",{
         name: $(".prod_name").val(),
-        price: $(".prod_price").val()})
+        price: $(".prod_price").val()
+        cantidad: $(".prod_price").val()})
 
         input_content.val('');
     
@@ -70,17 +75,13 @@
                     <tr>
                     <th>`+ product.name +`</th>
                     <th>`+ product.price +`</th>
+                    <th>`+ ProdCantidad +`</th>
                     </tr>
+                    
                 `)
             })
         })
-        $.delete("http://localhost:3001/api/product",{
-        name: $(".prod_name").val(),
-        price: $(".prod_price").val()})
-
-        input_content.val('');
     }
 
-    load_content('http://'+ window.location.host +'/api/product')
-    load_content('http://'+ window.location.host +'/api/product/cocina')
+    
 </script>

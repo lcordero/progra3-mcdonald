@@ -30,6 +30,7 @@ function saveProduct (req, res) {
   product.name = req.body.name
   product.picture = req.body.picture
   product.price = req.body.price
+  product.cantidad = req.body.cantidad
   product.category = req.body.category
   product.description = req.body.description
 

@@ -25,6 +25,9 @@ app.get('/login', (req, res) => {
 app.get('/product', (req, res) => {
   res.sendFile(path.join(viewsPath+'product.html'));
 })
+app.get('/product2.html', (req, res) => {
+  res.sendFile(path.join(viewsPath+'product2.html'));
+})
 
 
 
