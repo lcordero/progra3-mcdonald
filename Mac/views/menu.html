@@ -10,11 +10,16 @@
 
     <Style type = "text/css">
       body {
-        background-color: rgb(87, 87, 145);
+        background-color: rgb(77, 159, 214);
       }
-      * {
-        padding:4px;
+      * button {
+        padding:40px 40px;
         margin: 8px;
+        width: 800px;
+      }
+      .ord {
+        color: black;
+
       }
       #header {
         margin: 8px;
@@ -22,14 +27,12 @@
         font-family:Arial, Helvestica, sans-serif;
       }
       
-      .inicio  button nav{
+      nav {
         display: block;
         font-style: 40px;
-        background: rgb(207, 97, 24);
         text-align: center;
         line-height: 20px;
         border-radius: 5px;
-        
       }    
       
       
@@ -37,10 +40,20 @@
 </head>
 <body>
     <nav>
-        <button class ="inicio">Inicio</button>
-        <button class="Menu">Menu</button>
-        <button class="Cocina">Cocina</button>
-        <button class="Nosotros">Nosotros</button>
+        <!--button class ="inicio" href="menu.html">Inicio</button-->
+        <button class="agregarmenu">
+          <a class="ord" href="menu1">Agregar Menu</a>
+        </button>
+        <button class="Menu">
+          <a class="ord" href="menu2">Ordena Aqui</a>
+        </button>
+        <button class="Cocina">
+          <a class="ord" href="menu3">Orden</a>
+        </button>
+        <button class="Nosotros">
+          <a class="ord" href="menu4">Nosotros</a>
+        </button>
+        
     </nav>
         
      

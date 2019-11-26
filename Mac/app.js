@@ -27,6 +27,18 @@ app.use(express.urlencoded({extended: false}));
 app.get('/menu', (req, res) => {
     res.sendFile(path.join(viewsPath+'menu.html'));
   })
+app.get('/menu2', (req, res) => {
+    res.sendFile(path.join(viewsPath+'menu2.html'));
+  })
+app.get('/menu3', (req, res) => {
+    res.sendFile(path.join(viewsPath+'menu3.html'));
+  })
+app.get('/menu4', (req, res) => {
+    res.sendFile(path.join(viewsPath+'menu4.html'));
+  })
+  app.get('/menu1', (req, res) => {
+    res.sendFile(path.join(viewsPath+'menu1.html'));
+  })
 
 //   iniciando en servidor
 app.listen(app.get('port'), () => {
