@@ -54,6 +54,7 @@
     });
 
     send_content.on("click", function(){
+        console.log('se envio')
         socket.emit('new_product', {
             'name': $(".prod_name").val(), 
             'price': $(".prod_price").val(),
@@ -64,8 +65,9 @@
             name: $(".prod_name").val(),
             price: $(".prod_price").val(),
             cantidad: $(".prod_cantidad").val()
+           
         });
-
+        console.log('aqui gurde');
         input_content.val('');
     
     })
@@ -79,13 +81,14 @@
                     <tr>
                     <th>`+ product.name +`</th>
                     <th>`+ product.price +`</th>
-                    <th>`+ Product.cantidad +`</th>
+                    <th>`+ product.cantidad +`</th>
                     </tr>
                     
                 `)
             })
         })
     }
-
+    load_content('http://'+ window.location.host +'/api/product')
+    
     
 </script>
