@@ -1,6 +1,6 @@
 const Menu = require('../models/menu')
 
-
+//Carga el html
 function getmenu (req, res) {
     Menu.find({}, (err, menus) => {
       if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
