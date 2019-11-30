@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MACDONALD</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <button class ="inicio">
+            <a class="nuevoMenu" href="menu">Inicio</a> 
+    </button>
+<style>
+    .inicio {
+        padding:4px 4px;
+        margin: 8px;
+        width: 80px;
+        text-align: center;
+    }
+    h1 {
+        font-size: 30px;
+        margin: 15px;
+    }
+    input {
+        font-size: 20px;
+        margin: 20px;
+    }
+    .guardar {
+        font-size: 20px;
+        margin: 20px;
+        background: chocolate;
+        border-radius: 8px;
+    }
+</style>
+</head>
+<h1>Agregar Productos</h1>
+<hr />
+<input placeholder="Combo" class="combo"> 
+<br>
+<input placeholder="Bebida" class="bebida"> 
+<br>
+<input placeholder="Acompañamiento" class="acomp"> 
+<br>
+<button class="guardar">Enviar</button>
+<hr />
+    <table style="width:100%" class="datos">
+        <thead class="orden">
+            <tr>
+                <th>Combo</th>
+                <th>Bebida</th>
+                <th>Acompañamiento</th>
+            </tr>
+        </thead>
+        <tbody class="cuerpo_tabla"></tbody>
+    </table>
+<script src="/assets/jquery.js"></script>
+<script src="/assets/socket.io.js"></script>
+<script>
+    var combo = $(".combo")
+    var input_c = $(":input")
+    var bebida = $(".bebida")
+    var acomp = $(".acomp")
+    var button = $(".guardar")
+    var cuerpo_t = $(".cuerpo_tabla")
+    var guarda = $(".guardar")
+
+var socket = io.connect(window.location.host);
+    socket.on('recarga', function() {
+        console.log('conectado nuevo menu con socket');
+        socket.send('connect nuevo menu con socket!')
+    });
+    socket.on("menu_nuevo", function(prod){
+        if (!prod.combo || !prod.bebida || !prod.acompanamiento ) return
+        cuerpo_t.append(`
+            <tr>
+            <th>`+ prod.combo +`</th>
+            <th>`+ prod.bebida +`</th>
+            <th>`+ prod.acompanamiento +`</th>
+            </tr>
+        `)
+    })
+
+    
+        $.post( "http://localhost:3001/api/menu", { 
+            'combo': $(".combo").val(),
+            'bebida': $(".bebida").val(),
+            'acompanamiento': $(".acomp").val()
+        });
+        guarda.on("click", function(e){
+        console.log("click on send info")
+        socket.emit('menu_nuevo', {
+            'combo': $(".combo").val(), 
+            'bebida': $(".bebida").val(),
+            'acompanamiento': $(".acomp").val()
+        });
+        input_c.val(' ');
+    })
+   
+    var contenido = function(url){
+        $.get( url, function( data ) {
+                cuerpo_t.empty()
+            $.each( data.prods, function( i, prod ) {
+                cuerpo_t.append(`
+                    <tr>
+                    <th>`+ nuevoMenu.combo +`</th>
+                    <th>`+ nuevoMenu.bebida +`</th>
+                    <th>`+ nuevoMenu.acompanamiento +`</th>
+                    </tr>
+                `)
+            })
+        })
+    }
+        contenido('http://'+ window.location.host +'/api/menu')
+</script>
+
+
+
+
+</html>

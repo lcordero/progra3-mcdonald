@@ -24,6 +24,8 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 
 // ruta
+app.use('/api', api)
+
 app.get('/menu', (req, res) => {
     res.sendFile(path.join(viewsPath+'menu.html'));
   })
@@ -36,8 +38,8 @@ app.get('/menu3', (req, res) => {
 app.get('/menu4', (req, res) => {
     res.sendFile(path.join(viewsPath+'menu4.html'));
   })
-  app.get('/menu1', (req, res) => {
-    res.sendFile(path.join(viewsPath+'menu1.html'));
+  app.get('/NuevoMenu', (req, res) => {
+    res.sendFile(path.join(viewsPath+'NuevoMenu.html'));
   })
 
 //   iniciando en servidor
