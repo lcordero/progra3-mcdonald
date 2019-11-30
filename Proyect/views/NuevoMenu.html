@@ -43,16 +43,16 @@
 <br>
 <button class="guardar">Enviar</button>
 <hr />
-<table style="width:100%" class="datos">
-<thead class="orden">
-    <tr>
-    <th>Combo</th>
-    <th>Bebida</th>
-    <th>Acompañamiento</th>
-    </tr>
-</thead>
-<tbody class="cuerpo_tabla"></tbody>
-</table>
+    <table style="width:100%" class="datos">
+        <thead class="orden">
+            <tr>
+                <th>Combo</th>
+                <th>Bebida</th>
+                <th>Acompañamiento</th>
+            </tr>
+        </thead>
+        <tbody class="cuerpo_tabla"></tbody>
+    </table>
 <script src="/assets/jquery.js"></script>
 <script src="/assets/socket.io.js"></script>
 <script>
@@ -70,8 +70,8 @@
     });
 
     socket.on("menu_nuevo", function(prod){
-        if (!prod.name || !prod.price) return
-        table_content.append(`
+        if (!prod.combo || !prod.bebida || !prod.acompanamiento ) return
+        cuerpo_t.append(`
             <tr>
             <th>`+ prod.combo +`</th>
             <th>`+ prod.bebida +`</th>
@@ -91,22 +91,23 @@
         input.val(' ');
     })
    
-    // var contenido = function(url){
-    //     $.get( url, function( data ) {
-    //         cuerpo_t.empty()
-    //         $.each( data.nuevoMenus, function( i, nuevoMenu ) {
-    //             cuerpo_t.append(`
-    //                 <tr>
-    //                 <th>`+ nuevoMenu.combo +`</th>
-    //                 <th>`+ nuevoMenu.bebida +`</th>
-    //                 <th>`+ nuevoMenu.acompanamiento +`</th>
-    //                 </tr>
-    //             `)
-    //         })
-    //     })
-    // }
+    var contenido = function(url){
+        $.get( url, function( data ) {
+            console.log(data)
+            cuerpo_t.empty()
+            $.each( data.nuevo_menus, function( i, nuevoMenu ) {
+                cuerpo_t.append(`
+                    <tr>
+                    <th>`+ nuevoMenu.combo +`</th>
+                    <th>`+ nuevoMenu.bebida +`</th>
+                    <th>`+ nuevoMenu.acompanamiento +`</th>
+                    </tr>
+                `)
+            })
+        })
+    }
 
-        // contenido('http://'+ window.location.host +'/api/menu')
+        contenido('http://'+ window.location.host +'/api/menu')
 
 
 
