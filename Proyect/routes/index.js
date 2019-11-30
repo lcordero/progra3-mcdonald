@@ -1,13 +1,15 @@
 'use strict'
 
 const express = require('express')
-const OrdenCtrl = require('../controllers/menu1')
+const NuevoMenuCtrl = require('../controllers/NuevoMenu')
 const api = express.Router()
 
-api.get('/orden', OrdenCtrl.getOrdenes)
-api.get('/orden/:ordenId', OrdenCtrl.getOrden)
-api.post('/orden', OrdenCtrl.saveOrden)
-api.put('/orden/:ordenId', OrdenCtrl.updateOrden)
-api.delete('/orden/:ordenId', OrdenCtrl.deleteOrden)
+
+// rutas de agregar NuevoMenu
+api.get('/menu', NuevoMenuCtrl.getNuevoMenus)
+api.get('/menu/:NuevoMenuId', NuevoMenuCtrl.getNuevoMenu)
+api.post('/menu', NuevoMenuCtrl.saveNuevoMenu)
+api.put('/menu/:NuevoMenuId', NuevoMenuCtrl.updateNuevoMenu)
+api.delete('/menu/:NuevoMenuId', NuevoMenuCtrl.deleteNuevoMenu)
 
 module.exports = api
