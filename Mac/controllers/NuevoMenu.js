@@ -2,9 +2,9 @@ const NuevoMenu = require('../models/NuevoMenu')
 
 
 function getNuevoMenu (req, res) {
-  let nuevo_menuId = req.params.nuevo_menuId
+  let NuevoMenuId = req.params.NuevoMenuId
 
-  NuevoMenu.findById(nuevo_menuId, (err, nuevo_menu) => {
+  NuevoMenu.findById(NuevoMenuId, (err, nuevo_menu) => {
     if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
     if (!nuevo_menu) return res.status(404).send({message: `El menu no existe`})
 
@@ -39,10 +39,10 @@ function saveNuevoMenu (req, res) {
 }
 
 function updateNuevoMenu (req, res) {
-  let nuevo_menuId = req.params.nuevo_menutId
+  let NuevoMenuId = req.params.nuevo_menutId
   let update = req.body
 
-  NuevoMenu.findByIdAndUpdate(nuevo_menuId, update, (err, nuevo_menuUpdated) => {
+  NuevoMenu.findByIdAndUpdate(NuevoMenuId, update, (err, nuevo_menuUpdated) => {
     if (err) res.status(500).send({message: `Error al actualizar el menu: ${err}`})
 
     res.status(200).send({ nuevo_menu: nuevo_menuUpdated })
@@ -50,9 +50,9 @@ function updateNuevoMenu (req, res) {
 }
 
 function deleteNuevoMenu (req, res) {
-  let nuevo_menuId = req.params.nuevo_menuId
-
-  NuevoMenu.findById(nuevo_menuId, (err, nuevo_menu) => {
+  let NuevoMenuId = req.params.NuevoMenuId
+  console.log(NuevoMenuId)
+  NuevoMenu.findById(NuevoMenuId, (err, nuevo_menu) => {
     if (err) res.status(500).send({message: `Error al borrar el menu: ${err}`})
 
     nuevo_menu.remove(err => {

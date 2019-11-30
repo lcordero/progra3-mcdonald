@@ -19,11 +19,11 @@ mongoose.connect(config.db, (err, res) => {
       client.send("nueva conexion al socket");
       client.broadcast.send("nueva conexion");
 
-      client.on('NuevoMenu', function(product) {
+      client.on('menu_nuevo', function(menu) {
         console.log("hereeeeeeeeeeeeeeeee")
-        console.log(product)
-        client.emit('NuevoMenu', product);
-        client.broadcast.emit('NuevoMenu', product);
+        console.log(menu)
+        client.emit('menu_nuevo', menu);
+        client.broadcast.emit('menu_nuevo', menu);
       });
 
       client.on('message', function(msg) {
