@@ -2,20 +2,19 @@
 
 const express = require('express')
 const menuCtrl = require('../controllers/menu')
-
 const adminCtrl = require('../controllers/admin')
+const ordenCtrl = require('../controllers/orden')
 
-const OrdenCtrl = require('../controllers/menu1')
 const api = express.Router()
 
 // rutas menu
 api.get('/menu', menuCtrl.getmenu)
 
-api.get('/orden', OrdenCtrl.getOrdenes)
-api.get('/orden/:ordenId', OrdenCtrl.getOrden)
-api.post('/orden', OrdenCtrl.saveOrden)
-api.put('/orden/:ordenId', OrdenCtrl.updateOrden)
-api.delete('/orden/:ordenId', OrdenCtrl.deleteOrden)
+api.get('/orden', ordenCtrl.getAdmin)
+api.get('/orden/:ordenId', ordenCtrl.getAdmin)
+// api.post('/orden', OrdenCtrl.saveOrden)
+// api.put('/orden/:ordenId', OrdenCtrl.updateOrden)
+// api.delete('/orden/:ordenId', OrdenCtrl.deleteOrden)
 
 
 // rutas de agregar Admin

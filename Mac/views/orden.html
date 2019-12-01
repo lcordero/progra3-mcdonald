@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MACDONALD</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    .inicio {
+        padding:4px 4px;
+        margin: 8px;
+        width: 80px;
+        text-align: center;
+    }
+    select {
+        margin: 30px;
+        width: 100px;
+    }
+    h1 {
+        font-size: 35px;
+    }
+
+</style>
+<button class ="inicio">
+        <a class="ordena" href="menu">Inicio</a> 
+</button>
+<br>
+<hr />
+<!-- <form name="formulario1" action="#">
+    <div class="contenedor#1">
+        <h1>Elije tu Combo</h1>
+        <select name="cosa" class="combo" onchange='cambia()'>
+            <option value="0"> </option>
+            <option value="1">Pollo</option>
+            <option value="2">Hamburguesa de Pollo</option>
+            <option value="3">Hamburguesa de Carne</option>
+            <option value="4">McWrap</option>     
+        </select>
+        <select name="opt" class="combo">
+            <option value="-">-
+        </select>
+    </div>
+    </form>
+
+<script>
+    var opt_1 = new Array (" ", "McNuggets", "McCrispy");
+    var opt_2 = new Array (" ", "McPollo Jr", "Pollo Bacon", "Premiun CBO", "Pollo Clasico");
+    var opt_3 = new Array (" ", "Club House", "Big Mac", "Curarto de Libra Q", "McNifica", "Hamg con Queso");
+    var opt_4 = new Array (" ", "W. Clasico", "W. Bacon");
+    
+function cambia(){
+	var cosa;
+//Se toma el vamor de la "cosa seleccionada"
+	cosa = document.formulario1.cosa[document.formulario1.cosa.selectedIndex].value;
+//se chequea si la "cosa" esta definida
+	if(cosa!=0){
+//selecionamos las cosas Correctas
+	mis_opts=eval("opt_" + cosa);
+//se calcula el numero de cosas
+	num_opts=mis_opts.length;
+//marco el numero de opt en el select
+	document.formulario1.opt.length = num_opts;
+//para cada opt del array, la pongo en el select
+	for(i=0; i<num_opts; i++){
+	document.formulario1.opt.options[i].value=mis_opts[i];
+	document.formulario1.opt.options[i].text=mis_opts[i];
+}
+	}else{
+//si no habia ninguna opt seleccionada, elimino las cosas del select
+	document.formulario1.opt.length = 1;
+//ponemos un guion en la unica opt que he dejado
+	document.formulario1.opt.options[0].value="-";
+	document.formulario1.opt.options[0].text="-";
+}
+//hacer un reset de las opts
+	document.formulario1.opt.options[0].selected = true;
+					
+				}
+</script>
+</head>
+<body>
+
+
+<hr />
+<h1>Elije Bebida</h1>
+<select class="bebida">
+    <option> </option>
+    <option>Te Frio</option>
+    <option>Coca-Cola</option>
+    <option>Fanta</option>
+    <option>Sprite</option>
+    <option>Jugo</option> 
+    <option>Agua</option>      
+</select>
+<hr />
+<h1>Elije Acompañamiento</h1>
+<select class="acompaña">
+    <option> </option>
+    <option>Papas</option>
+    <option>Ensalada</option>
+    <option>Pure de Papa</option>     
+</select> -->
+<hr />
+<style>
+        .inicio {
+            padding:4px 4px;
+            margin: 8px;
+            width: 80px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 30px;
+            margin: 15px;
+        }
+        input {
+            font-size: 20px;
+            margin: 20px;
+        }
+        .guardar {
+            font-size: 20px;
+            margin: 20px;
+            background: chocolate;
+            border-radius: 8px;
+        }
+</style>
+    </head>
+    <h1>Seleccion tu combo</h1>
+    <hr />
+    <select placeholder="Combo" class="combo"></select>
+    <br>
+    <select placeholder="Bebida" class="bebida"></select>
+    <br>
+    <select placeholder="Acompañamiento" class="acomp"></select> 
+    <br>
+    <button class="guardar">Enviar</button>
+    <hr />
+        <table style="width:100%" class="datos">
+            <thead class="orden">
+                <tr>
+                    <th>Combo</th>
+                    <th>Bebida</th>
+                    <th>Acompañamiento</th>
+                </tr>
+            </thead>
+            <tbody class="cuerpo_t"></tbody>
+        </table>
+    <script src="/assets/jquery.js"></script>
+    <script src="/assets/socket.io.js"></script>
+    <script>
+    
+        var inputs = $(":input")
+        var button = $(".guardar")
+        var cuerpo_t = $(".cuerpo_t")
+        
+    
+        socket = io.connect(window.location.host);
+        socket.on('conect', function() {
+            console.log('conectado nuevo menu con socket');
+            socket.send('connect nuevo menu con socket!')
+        });
+        socket.on("nuevo_menu", function(admin){
+            if (!admin.combo || !admin.bebida || !admin.acomp ) return
+            cuerpo_t.append(`
+                <tr>
+                <th>`+ admin.combo +`</th>
+                <th>`+ admin.bebida +`</th>
+                <th>`+ admin.acomp +`</th>
+                </tr>
+            `)
+        })
+    
+        button.on("click", function(){
+            console.log("click on send info")
+            socket.emit('nuevo_menu', {
+                'combo': $(".combo").val(), 
+                'bebida': $(".bebida").val(),
+                'acompanamiento': $(".acomp").val()
+            });
+            $.post( "http://localhost:3001/api/admin", { 
+                combo : $(".combo").val(),
+                bebida : $(".bebida").val(),
+                acompanamiento : $(".acomp").val()
+            });
+            inputs.val(' ');
+        })
+       
+        var contenido = function(url){
+            $.get( url, function( data ) {
+                    cuerpo_t.empty()
+                $.each( data.admins, function( i, admin ) {
+                    cuerpo_t.append(`
+                        <tr>
+                        <th>`+ admin.combo +`</th>
+                        <th>`+ admin.bebida +`</th>
+                        <th>`+ admin.acompanamiento +`</th>
+                        </tr>
+                    `)
+                })
+            })
+        }
+            contenido('http://'+ window.location.host +'/api/admin')
+    </script>
+</body>
