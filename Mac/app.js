@@ -24,6 +24,10 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 
 // ruta
+app.use('/api', api)
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(viewsPath+'admin.html'));
+})
 app.get('/menu', (req, res) => {
     res.sendFile(path.join(viewsPath+'menu.html'));
   })
@@ -36,13 +40,11 @@ app.get('/menu3', (req, res) => {
 app.get('/menu4', (req, res) => {
     res.sendFile(path.join(viewsPath+'menu4.html'));
   })
-  app.get('/menu1', (req, res) => {
-    res.sendFile(path.join(viewsPath+'menu1.html'));
-  })
 
-//   iniciando en servidor
-app.listen(app.get('port'), () => {
-    console.log(`Server on port ${app.get('port')}`);
-});
+
+  // iniciando en servidor
+  // app.listen(app.get('port'), () => {
+  //    console.log(`Server on port ${app.get('port')}`);
+  // });
 
 module.exports = app
