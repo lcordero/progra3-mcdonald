@@ -3,10 +3,10 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const MacSchema = Schema({
+const AdminSchema = Schema({
     combo: String,
     bebida: String,
     acompanamiento: String
 })
 
-module.exports = mongoose.model('NuevoMenu', MacSchema)
+module.exports = mongoose.model('Admin', AdminSchema)

@@ -51,66 +51,64 @@
                 <th>Acompañamiento</th>
             </tr>
         </thead>
-        <tbody class="cuerpo_tabla"></tbody>
+        <tbody class="cuerpo_t"></tbody>
     </table>
 <script src="/assets/jquery.js"></script>
 <script src="/assets/socket.io.js"></script>
 <script>
-    var combo = $(".combo")
-    var input_c = $(":input")
-    var bebida = $(".bebida")
-    var acomp = $(".acomp")
+
+    var inputs = $(":input")
     var button = $(".guardar")
-    var cuerpo_t = $(".cuerpo_tabla")
-    var guarda = $(".guardar")
+    var cuerpo_t = $(".cuerpo_t")
+    
 
 var socket = io.connect(window.location.host);
-    socket.on('recarga', function() {
+    socket.on('conect', function() {
         console.log('conectado nuevo menu con socket');
         socket.send('connect nuevo menu con socket!')
     });
-    socket.on("menu_nuevo", function(prod){
-        if (!prod.combo || !prod.bebida || !prod.acompanamiento ) return
+    socket.on("nuevo_menu", function(admin){
+        if (!admin.combo || !admin.bebida || !admin.acomp ) return
         cuerpo_t.append(`
             <tr>
-            <th>`+ prod.combo +`</th>
-            <th>`+ prod.bebida +`</th>
-            <th>`+ prod.acompanamiento +`</th>
+            <th>`+ admin.combo +`</th>
+            <th>`+ admin.bebida +`</th>
+            <th>`+ admin.acomp +`</th>
             </tr>
         `)
     })
 
-    
+    button.on("click", function(){
+        console.log("click on send info")
+        socket.emit('nuevo_menu', {
+            'combo': $(".combo").val(), 
+            'bebida': $(".bebida").val(),
+            'acompanamiento': $(".acomp").val()
+        });
+        
         $.post( "http://localhost:3001/api/menu", { 
             'combo': $(".combo").val(),
             'bebida': $(".bebida").val(),
             'acompanamiento': $(".acomp").val()
         });
-        guarda.on("click", function(e){
-        console.log("click on send info")
-        socket.emit('menu_nuevo', {
-            'combo': $(".combo").val(), 
-            'bebida': $(".bebida").val(),
-            'acompanamiento': $(".acomp").val()
-        });
-        input_c.val(' ');
+        inputs.val(' ');
     })
    
     var contenido = function(url){
         $.get( url, function( data ) {
                 cuerpo_t.empty()
-            $.each( data.prods, function( i, prod ) {
+            $.each( data.admins, function( i, admin ) {
                 cuerpo_t.append(`
                     <tr>
-                    <th>`+ nuevoMenu.combo +`</th>
-                    <th>`+ nuevoMenu.bebida +`</th>
-                    <th>`+ nuevoMenu.acompanamiento +`</th>
+                    <th>`+ admin.combo +`</th>
+                    <th>`+ admin.bebida +`</th>
+                    <th>`+ admin.acomp +`</th>
                     </tr>
                 `)
             })
         })
     }
-        contenido('http://'+ window.location.host +'/api/menu')
+        contenido('http://'+ window.location.host +'/api/admin')
 </script>
 
 

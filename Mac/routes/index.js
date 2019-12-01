@@ -1,6 +1,6 @@
 const express = require('express')
 const menuCtrl = require('../controllers/menu')
-const NuevoMenuCtrl = require('../controllers/NuevoMenu')
+const adminCtrl = require('../controllers/admin')
 const api = express.Router()
 
 api.get('/menu', menuCtrl.getmenu)
@@ -9,12 +9,12 @@ api.get('/menu', menuCtrl.getmenu)
 
 
 
-// rutas de agregar NuevoMenu
-api.get('/menu', NuevoMenuCtrl.getNuevoMenus)
-api.get('/menu/:NuevoMenuId', NuevoMenuCtrl.getNuevoMenu)
-api.post('/menu', NuevoMenuCtrl.saveNuevoMenu)
-api.put('/menu/:NuevoMenuId', NuevoMenuCtrl.updateNuevoMenu)
-api.delete('/menu/:NuevoMenuId', NuevoMenuCtrl.deleteNuevoMenu)
+// rutas de agregar Admin
+api.get('/admin', adminCtrl.getAdmins)
+api.get('/admin/:adminId', adminCtrl.getAdmin)
+api.post('/admin', adminCtrl.saveAdmin)
+api.put('/admin/:adminId', adminCtrl.updateAdmin)
+api.delete('/admin/:adminId', adminCtrl.deleteAdmin)
 
 
 
