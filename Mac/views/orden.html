@@ -19,7 +19,7 @@
         width: 100px;
     }
     h1 {
-        font-size: 35px;
+        font-size: 20px;
     }
 
 </style>
@@ -104,20 +104,6 @@ function cambia(){
 </select> -->
 <hr />
 <style>
-        .inicio {
-            padding:4px 4px;
-            margin: 8px;
-            width: 80px;
-            text-align: center;
-        }
-        h1 {
-            font-size: 30px;
-            margin: 15px;
-        }
-        input {
-            font-size: 20px;
-            margin: 20px;
-        }
         .guardar {
             font-size: 20px;
             margin: 20px;
@@ -126,14 +112,18 @@ function cambia(){
         }
 </style>
     </head>
+<form name = "furmulario1" class = "formu">
     <h1>Seleccion tu combo</h1>
     <hr />
     <select placeholder="Combo" class="combo"></select>
     <br>
+    <h1>Seleccion tu bebida</h1>
     <select placeholder="Bebida" class="bebida"></select>
     <br>
+    <h1>Seleccion tu Acompañamiento</h1>
     <select placeholder="Acompañamiento" class="acomp"></select> 
     <br>
+</form>
     <button class="guardar">Enviar</button>
     <hr />
         <table style="width:100%" class="datos">
@@ -152,7 +142,7 @@ function cambia(){
     
         var inputs = $(":input")
         var button = $(".guardar")
-        var cuerpo_t = $(".cuerpo_t")
+        var cuerpo_t = $(".formu")
         
     
         socket = io.connect(window.location.host);
@@ -191,11 +181,11 @@ function cambia(){
                     cuerpo_t.empty()
                 $.each( data.admins, function( i, admin ) {
                     cuerpo_t.append(`
-                        <tr>
-                        <th>`+ admin.combo +`</th>
-                        <th>`+ admin.bebida +`</th>
-                        <th>`+ admin.acompanamiento +`</th>
-                        </tr>
+                        <select>
+                        <option>`+"--"+`</option>
+                        <option>`+ admin.combo +`</option>
+                        </select>
+                        
                     `)
                 })
             })
