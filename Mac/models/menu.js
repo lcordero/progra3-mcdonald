@@ -1,10 +1,12 @@
+'use strict'
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const menuSchema = Schema({
-  papas: String,
-  price: { type: Number, default: 0 },
-  
-})
+const MacSchema = Schema({
+    combo: String,
+    bebida: String,
+    acompañamiento: String,
+}) 
 
-module.exports = mongoose.model('Menu', menuSchema)
+module.exports = mongoose.model('Mac', MacSchema)
