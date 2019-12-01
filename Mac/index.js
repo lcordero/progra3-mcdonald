@@ -14,17 +14,17 @@ mongoose.connect(config.db, (err, res) => {
     app.listen(config.port, () => {
       console.log(`API REST corriendo en http://localhost:${config.port}`)
     })
-
   );
+
   socket.on('connection', function(client) {
     client.send("nueva conexion al socket");
     client.broadcast.send("nueva conexion");
 
-    client.on('menu_nuevo', function(admin) {
-      console.log("hereeeeeeeeeeeeeeeee")
-      console.log(" XD ")
-      client.emit('menu_nuevo', admin);
-      client.broadcast.emit('menu_nuevo', admin);
+    client.on('nuevo_menu', function(admin) {
+      console.log(admin)
+      console.log("recarga")
+      client.emit('nuevo_menu', admin);
+      client.broadcast.emit('nuevo_menu', admin);
     });
 
     client.on('message', function(msg) {
@@ -32,7 +32,7 @@ mongoose.connect(config.db, (err, res) => {
         client.send(msg);
         client.broadcast.send(msg);
     }); 
-
+  
     client.on('disconnect', function() {
         console.log('Desconectado');
     });

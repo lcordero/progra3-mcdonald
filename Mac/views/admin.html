@@ -62,7 +62,7 @@
     var cuerpo_t = $(".cuerpo_t")
     
 
-var socket = io.connect(window.location.host);
+    socket = io.connect(window.location.host);
     socket.on('conect', function() {
         console.log('conectado nuevo menu con socket');
         socket.send('connect nuevo menu con socket!')
@@ -85,11 +85,10 @@ var socket = io.connect(window.location.host);
             'bebida': $(".bebida").val(),
             'acompanamiento': $(".acomp").val()
         });
-        
-        $.post( "http://localhost:3001/api/menu", { 
-            'combo': $(".combo").val(),
-            'bebida': $(".bebida").val(),
-            'acompanamiento': $(".acomp").val()
+        $.post( "http://localhost:3001/api/admin", { 
+            combo : $(".combo").val(),
+            bebida : $(".bebida").val(),
+            acompanamiento : $(".acomp").val()
         });
         inputs.val(' ');
     })
@@ -102,7 +101,7 @@ var socket = io.connect(window.location.host);
                     <tr>
                     <th>`+ admin.combo +`</th>
                     <th>`+ admin.bebida +`</th>
-                    <th>`+ admin.acomp +`</th>
+                    <th>`+ admin.acompanamiento +`</th>
                     </tr>
                 `)
             })
