@@ -2,24 +2,19 @@
 
 const express = require('express')
 const menuCtrl = require('../controllers/menu')
-<<<<<<< HEAD
 const adminCtrl = require('../controllers/admin')
-=======
-const OrdenCtrl = require('../controllers/menu1')
->>>>>>> 7fbde5226d9f9c35dc7f1660462eac9fcacc04b4
+const ordenCtrl = require('../controllers/orden')
+
 const api = express.Router()
 
 // rutas menu
 api.get('/menu', menuCtrl.getmenu)
 
-api.get('/orden', OrdenCtrl.getOrdenes)
-api.get('/orden/:ordenId', OrdenCtrl.getOrden)
-api.post('/orden', OrdenCtrl.saveOrden)
-api.put('/orden/:ordenId', OrdenCtrl.updateOrden)
-api.delete('/orden/:ordenId', OrdenCtrl.deleteOrden)
-
-<<<<<<< HEAD
-
+api.get('/orden', ordenCtrl.getAdmin)
+api.get('/orden/:ordenId', ordenCtrl.getAdmin)
+// api.post('/orden', OrdenCtrl.saveOrden)
+// api.put('/orden/:ordenId', OrdenCtrl.updateOrden)
+// api.delete('/orden/:ordenId', OrdenCtrl.deleteOrden)
 
 
 // rutas de agregar Admin
@@ -32,6 +27,3 @@ api.delete('/admin/:adminId', adminCtrl.deleteAdmin)
 
 
 module.exports = api
-=======
-module.exports = api
->>>>>>> 7fbde5226d9f9c35dc7f1660462eac9fcacc04b4

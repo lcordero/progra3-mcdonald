@@ -31,8 +31,8 @@ app.get('/admin', (req, res) => {
 app.get('/menu', (req, res) => {
     res.sendFile(path.join(viewsPath+'menu.html'));
   })
-app.get('/menu2', (req, res) => {
-    res.sendFile(path.join(viewsPath+'menu2.html'));
+app.get('/orden', (req, res) => {
+    res.sendFile(path.join(viewsPath+'orden.html'));
   })
 app.get('/menu3', (req, res) => {
     res.sendFile(path.join(viewsPath+'menu3.html'));
