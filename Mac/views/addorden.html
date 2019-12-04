@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <button class ="inicio">
-            <a class="nuevoMenu" href="menu">Inicio</a> 
+            <a class="nuevoMenu" href="opciones.html">Inicio</a> 
     </button>
 <style>
     .inicio {
@@ -85,7 +85,7 @@
             'bebida': $(".bebida").val(),
             'acompanamiento': $(".acomp").val()
         });
-        $.post( "http://localhost:3001/api/admin", { 
+        $.post( "http://localhost:3001/api/addorden", { 
             combo : $(".combo").val(),
             bebida : $(".bebida").val(),
             acompanamiento : $(".acomp").val()
@@ -107,7 +107,7 @@
             })
         })
     }
-        contenido('http://'+ window.location.host +'/api/admin')
+        contenido('http://'+ window.location.host +'/api/addorden')
 </script>
 
 
