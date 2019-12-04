@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MACDONALD</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    .inicio {
+        padding:4px 4px;
+        margin: 8px;
+        width: 80px;
+        text-align: center;
+    }
+    select {
+        margin: 30px;
+        width: 100px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+    .guardar {
+            font-size: 20px;
+            margin: 20px;
+            background: chocolate;
+            border-radius: 8px;
+        }
+
+</style>
+<button class ="inicio">
+        <a class="ordena" href="menu">Inicio</a> 
+</button>
+
+    </head>
+    <hr />
+<select name = "furmulario1" class = "combo"></select>
+<select name = "furmulario1" class = "bebida"></select>
+<select name = "furmulario1" class = "acomp"></select>
+<hr />
+    <button class="guardar">Elegir</button>
+    <hr />
+        <table style="width:100%" class="datos">
+       
+            <tbody class="cuerpo_t"></tbody>
+        </table>
+    <script src="/assets/jquery.js"></script>
+    <script src="/assets/socket.io.js"></script>
+    <script>
+    
+        var inputs = $(":input")
+        var button = $(".guardar")
+        var cuerpo_t = $(".combo")
+        var cuerpo_b = $(".bebida")
+        var cuerpo_a = $(".acomp")
+        
+var contenido = function(url){
+    $.get( url, function( data ) {
+        cuerpo_t.empty()
+        $.each( data.admins, function( i, admin ) {
+            cuerpo_t.append(`
+            <option>`+"--"+`</option>
+            <option>`+ admin.combo +`</option>
+            `)
+            cuerpo_b.append(`
+            <option>`+"--"+`</option>
+            <option>`+ admin.bebida +`</option>
+            `)
+            cuerpo_a.append(`
+            <option>`+"--"+`</option>
+            <option>`+ admin.acompanamiento +`</option>
+            `)
+        })
+    })
+}
+            contenido('http://'+ window.location.host +'/api/admin')
+    </script>
+</body>
