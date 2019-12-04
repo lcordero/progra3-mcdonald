@@ -14,10 +14,49 @@
         width: 80px;
         text-align: center;
     }
+    body{
+       background: yellow;
+    }
     
 </style>
     <button class ="inicio">
         <a class="ordena" href="menu">Inicio</a> 
     </button>
+<div class="contenido">
+    <table style="width:100%" class="datos">
+        <thead class="orden">
+            <tr>
+                <th class="combo">Combo</th>
+                <th class="bebida">Bebida</th>
+                <th class="acomp">Acompañamiento</th>
+            </tr>
+        </thead>
+        <tbody class="cuerpo_t"></tbody>
+    </table>
+</div>
 </head>
+<script src="/assets/jquery.js"></script>
+<script src="/assets/socket.io.js"></script>
+<script>
+
+var contenido = $(".contenido")
+var datos = $(".datos")
+
+var contenido = function(url){
+        $.get( url, function( data ) {
+                datos.empty()
+            $.each( data.admins, function( i, orden ) {
+                datos.append(`
+                    <tr>
+                    <th>`+ orden.combo +`</th>
+                    <th>`+ orden.bebida +`</th>
+                    <th>`+ orden.acompanamiento +`</th>
+                    </tr>
+                `)
+            })
+        })
+    }
+
+    contenido('http://'+ window.location.host +'/api/admin')
+</script>
 </html>

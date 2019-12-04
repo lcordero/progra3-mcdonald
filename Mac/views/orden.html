@@ -27,14 +27,16 @@
             background: chocolate;
             border-radius: 8px;
         }
-
+    body {
+        background: yellow;
+    }
 </style>
 <button class ="inicio">
         <a class="ordena" href="menu">Inicio</a> 
 </button>
 
     </head>
-    <hr />
+    <hr class="contenedor"/>
 <select name = "furmulario1" class = "combo"></select>
 <select name = "furmulario1" class = "bebida"></select>
 <select name = "furmulario1" class = "acomp"></select>
@@ -54,6 +56,7 @@
         var cuerpo_t = $(".combo")
         var cuerpo_b = $(".bebida")
         var cuerpo_a = $(".acomp")
+        var contenedor = $(".contenedor")
         
 var contenido = function(url){
     $.get( url, function( data ) {
@@ -74,6 +77,35 @@ var contenido = function(url){
         })
     })
 }
+
+socket = io.connect(window.location.host);
+    socket.on('conect', function() {
+        console.log('conectado nuevo menu con socket');
+        socket.send('connect nuevo menu con socket!')
+    });
+    socket.on("nuevo_menu", function(orden){
+        if (!orden.combo || !orden.bebida || !orden.acomp ) return
+        contenedor.append(`
+            <tr>
+            <th>`+ orden.combo +`</th>
+            <th>`+ orden.bebida +`</th>
+            <th>`+ orden.acomp +`</th>
+            </tr>
+        `)
+    })
+
+button.on("click", function(){
+        console.log("Enviando Orden a Cocina")
+        socket.emit('nuevo_orden', {
+            'combo': $(".combo").text(), 
+            'bebida': $(".bebida").text(),
+            'acompanamiento': $(".acomp").text()
+        })
+    })
+
+
+// $(".contenedor option:.combo", ".contenedor option:.")
+
             contenido('http://'+ window.location.host +'/api/admin')
     </script>
 </body>
