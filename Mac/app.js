@@ -14,6 +14,7 @@ app.set('view engine', 'html')
 
 
 app.use('/assets', [
+    express.static(__dirname + '/views/'),
     express.static(__dirname + '/node_modules/jquery/dist/'),
     express.static(__dirname + '/node_modules/socket.io-client/dist/')
   ]);
