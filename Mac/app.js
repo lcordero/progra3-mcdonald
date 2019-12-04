@@ -25,20 +25,20 @@ app.use(express.urlencoded({extended: false}));
 
 // ruta
 app.use('/api', api)
-app.get('/addorden', (req, res) => {
-  res.sendFile(path.join(viewsPath+'addorden.html'));
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(viewsPath+'admin.html'));
 })
-app.get('/opciones', (req, res) => {
-    res.sendFile(path.join(viewsPath+'opciones.html'));
+app.get('/menu', (req, res) => {
+    res.sendFile(path.join(viewsPath+'menu.html'));
   })
-app.get('/chooseorden', (req, res) => {
-    res.sendFile(path.join(viewsPath+'chooseorden.html'));
+app.get('/orden', (req, res) => {
+    res.sendFile(path.join(viewsPath+'orden.html'));
   })
-app.get('/cocina', (req, res) => {
-    res.sendFile(path.join(viewsPath+'cocina.html'));
+app.get('/menu3', (req, res) => {
+    res.sendFile(path.join(viewsPath+'menu3.html'));
   })
-app.get('/nosotros', (req, res) => {
-    res.sendFile(path.join(viewsPath+'nosotros.html'));
+app.get('/menu4', (req, res) => {
+    res.sendFile(path.join(viewsPath+'menu4.html'));
   })
 
 
