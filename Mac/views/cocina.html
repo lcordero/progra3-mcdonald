@@ -19,9 +19,13 @@
     }
     
 </style>
+<a>Indique cuando la orden este lista con el boton "Listo" o bien en caso de algun cambio del cliente "Cancelar"</a>
+    <hr/>
     <button class ="inicio">
         <a class="ordena" href="menu">Inicio</a> 
     </button>
+    <hr/>
+
 <div class="contenido">
     <table style="width:100%" class="datos">
         <thead class="orden">
@@ -45,18 +49,18 @@ var datos = $(".datos")
 var contenido = function(url){
         $.get( url, function( data ) {
                 datos.empty()
-            $.each( data.admins, function( i, orden ) {
+            $.each( data.admin, function( i, orden ) {
                 datos.append(`
                     <tr>
                     <th>`+ orden.combo +`</th>
                     <th>`+ orden.bebida +`</th>
                     <th>`+ orden.acompanamiento +`</th>
+                    <td><button class="listo">Listo</button> <button class="cancelar">Cancelar</button></td>
                     </tr>
                 `)
             })
         })
     }
-
     contenido('http://'+ window.location.host +'/api/admin')
-</script>
+</script
 </html>

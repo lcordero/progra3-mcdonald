@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
     <title>MACDONALD</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <button class ="inicio">
             <a class="nuevoMenu" href="menu">Inicio</a> 
     </button>
+<script src="/assets/jquery.js"></script>
+<script src="/assets/socket.io.js"></script>
 <style>
     .inicio {
         padding:4px 4px;
@@ -31,29 +30,7 @@
         background: chocolate;
         border-radius: 8px;
     }
-    .comboo {
-        font-size: 25px;
-        margin: 15px;
-        color: red;
-        font-family:Arial, Helvestica, sans-serif;
-    }
-    .bebidaa {
-        font-size: 25px;
-        margin: 15px;
-        color: red;
-        font-family:Arial, Helvestica, sans-serif;
-    }
-    .acompa {
-        font-size: 25px;
-        margin: 15px;
-        color: red;
-        font-family:Arial, Helvestica, sans-serif;
-    }
-    body {
-        background: yellow;
-    }
 </style>
-</head>
 <h1>Agregar Productos</h1>
 <hr />
 <input placeholder="Combo" class="combo"> 
@@ -67,34 +44,33 @@
     <table style="width:100%" class="datos">
         <thead class="orden">
             <tr>
-                <th class="comboo">Combo</th>
-                <th class="bebidaa">Bebida</th>
-                <th class="acompa">Acompañamiento</th>
+                <th>Combo</th>
+                <th>Bebida</th>
+                <th>Acompañamiento</th>
             </tr>
         </thead>
         <tbody class="cuerpo_t"></tbody>
     </table>
-<script src="/assets/jquery.js"></script>
-<script src="/assets/socket.io.js"></script>
+
 <script>
 
-    var inputs = $(":input")
+    var inputsss = $(":input")
     var button = $(".guardar")
     var cuerpo_t = $(".cuerpo_t")
     
 
-    socket = io.connect(window.location.host);
+    var socket = io.connect(window.location.host);
     socket.on('conect', function() {
-        console.log('conectado nuevo menu con socket');
-        socket.send('connect nuevo menu con socket!')
+        console.log('conectado nuevo menu con socket')
     });
+
     socket.on("nuevo_menu", function(admin){
-        if (!admin.combo || !admin.bebida || !admin.acomp ) return
+        if (!admin.combo || !admin.bebida || !admin.acompanamiento ) return
         cuerpo_t.append(`
             <tr>
             <th>`+ admin.combo +`</th>
             <th>`+ admin.bebida +`</th>
-            <th>`+ admin.acomp +`</th>
+            <th>`+ admin.acompanamiento +`</th>
             </tr>
         `)
     })
@@ -106,18 +82,19 @@
             'bebida': $(".bebida").val(),
             'acompanamiento': $(".acomp").val()
         });
+
         $.post( "http://localhost:3001/api/admin", { 
             combo : $(".combo").val(),
             bebida : $(".bebida").val(),
             acompanamiento : $(".acomp").val()
         });
-        inputs.val(' ');
+        inputsss.val('');
     })
    
     var contenido = function(url){
         $.get( url, function( data ) {
                 cuerpo_t.empty()
-            $.each( data.admins, function( i, admin ) {
+            $.each( data.admin, function( i, admin ) {
                 cuerpo_t.append(`
                     <tr>
                     <th>`+ admin.combo +`</th>
@@ -130,8 +107,3 @@
     }
         contenido('http://'+ window.location.host +'/api/admin')
 </script>
-
-
-
-
-</html>

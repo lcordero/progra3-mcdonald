@@ -15,11 +15,11 @@ function getAdmin (req, res) {
 }
 
 function getAdmins (req, res) {
-  Admin.find({}, (err, admins) => {
+  Admin.find({}, (err, admin) => {
     if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
-    if (!admins) return res.status(404).send({message: 'No existen menus'})
+    if (!admin) return res.status(404).send({message: 'No existen menus'})
 
-    res.send(200, { admins })
+    res.send(200, { admin })
   })
 }
 
