@@ -31,14 +31,12 @@ app.get('/admin', (req, res) => {
 app.get('/menu', (req, res) => {
     res.sendFile(path.join(viewsPath+'menu.html'));
   })
-app.get('/orden', (req, res) => {
-    res.sendFile(path.join(viewsPath+'orden.html'));
+app.get('/cocina', (req, res) => {
+    res.sendFile(path.join(viewsPath+'cocina.html'));
   })
-app.get('/menu3', (req, res) => {
-    res.sendFile(path.join(viewsPath+'menu3.html'));
-  })
-app.get('/menu4', (req, res) => {
-    res.sendFile(path.join(viewsPath+'menu4.html'));
+
+app.get('/nosotros', (req, res) => {
+    res.sendFile(path.join(viewsPath+'nosotros.html'));
   })
 
 
