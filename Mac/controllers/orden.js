@@ -9,7 +9,7 @@ function getAdmin (req, res) {
       if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
       if (!admin) return res.status(404).send({message: `El menu no existe`})
   
-      res.status(200).send({ admin })
+      res.status(200).send({ 'admin' : admin [0] })
     })
   }
   
