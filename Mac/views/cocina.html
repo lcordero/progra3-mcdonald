@@ -17,10 +17,19 @@
     body{
        background: yellow;
     }
+    h1 {
+        font-size: 20px;
+    }
+    .alt {
+        background: #0084ff;
+        color: #fff;
+        margin-top: 40px;
+        width: 200px;
+}
     
 </style>
-<a>Indique cuando la orden este lista con el boton "Listo" o bien en caso de algun cambio del cliente "Cancelar"</a>
-    <hr/>
+<h1>Indique cuando la orden este lista con el boton "Listo" o bien en caso de algun cambio del cliente "Cancelar"</h1>
+<hr/>
     <button class ="inicio">
         <a class="ordena" href="menu">Inicio</a> 
     </button>
@@ -45,6 +54,17 @@
 
 var contenido = $(".contenido")
 var datos = $(".datos")
+var listo = $(".listo")
+
+
+listo.on("click", function(){
+    console.log("click")
+    socket.emit('nuevo_menu', {
+        'combo': $(".combo").addClass(".alt"), 
+        'bebida': $(".bebida").addClass(".alt"),
+        'acompanamiento': $(".acomp").addClass(".alt")
+    });
+});
 
 var contenido = function(url){
         $.get( url, function( data ) {
@@ -58,9 +78,11 @@ var contenido = function(url){
                     <td><button class="listo">Listo</button> <button class="cancelar">Cancelar</button></td>
                     </tr>
                 `)
+                
             })
         })
+        
     }
-    contenido('http://'+ window.location.host +'/api/admin')
+contenido('http://'+ window.location.host +'/api/admin')
 </script
 </html>
