@@ -48,7 +48,7 @@ var datos = $(".datos")
 
 var contenido = function(url){
         $.get( url, function( data ) {
-                datos.empty()
+                // datos.empty()
             $.each( data.admin, function( i, orden ) {
                 datos.append(`
                     <tr>

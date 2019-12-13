@@ -76,12 +76,13 @@
     })
 
     button.on("click", function(){
-        console.log("click on send info")
+        console.log("Enviando Orden")
         socket.emit('nuevo_menu', {
             'combo': $(".combo").val(), 
             'bebida': $(".bebida").val(),
             'acompanamiento': $(".acomp").val()
         });
+        console.log("Nueva Orden")
 
         $.post( "http://localhost:3001/api/admin", { 
             combo : $(".combo").val(),
@@ -105,5 +106,6 @@
             })
         })
     }
+        console.log("Get de las ordenes a travez de la BD")
         contenido('http://'+ window.location.host +'/api/admin')
 </script>

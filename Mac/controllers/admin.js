@@ -41,7 +41,7 @@ function saveAdmin (req, res) {
 }
 
 function updateAdmin (req, res) {
-  let adminId = req.params.admintId
+  let adminId = req.params.adminId
   let update = req.body
 
   Admin.findByIdAndUpdate(adminId, update, (err, adminUpdated) => {

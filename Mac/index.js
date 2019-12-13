@@ -22,7 +22,7 @@ mongoose.connect(config.db, (err, res) => {
 
     client.on('nuevo_menu', function(admin) {
       console.log(admin)
-      console.log("recarga")
+      console.log("Recibiendo Nueva Orden")
       client.emit('nuevo_menu', admin);
       client.broadcast.emit('nuevo_menu', admin);
     });
