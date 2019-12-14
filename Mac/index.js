@@ -25,6 +25,12 @@ mongoose.connect(config.db, (err, res) => {
         client.emit('menu_nuevo', menu);
         client.broadcast.emit('menu_nuevo', menu);
       });
+      client.on('elimina_menu', function(menu_eli) {
+        console.log("hereeeeeeeeeeeeeeeee")
+        console.log(menu_eli)
+        client.emit('elimina', menu_eli);
+        client.broadcast.emit('elimina', menu_eli);
+      });
 
       client.on('message', function(msg) {
           console.log(msg)
