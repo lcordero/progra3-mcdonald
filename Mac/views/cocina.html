@@ -38,13 +38,15 @@
 <div class="contenido">
     <table style="width:100%" class="datos">
         <thead class="orden">
-            <tr>
+            <!-- <tr>
                 <th class="combo">Combo</th>
                 <th class="bebida">Bebida</th>
                 <th class="acomp">Acompañamiento</th>
-            </tr>
+                </tr> -->
         </thead>
-        <tbody class="cuerpo_t"></tbody>
+        <tbody class="cuerpo_t">
+        </tbody>
+
     </table>
 </div>
 </head>
@@ -55,34 +57,57 @@
 var contenido = $(".contenido")
 var datos = $(".datos")
 var listo = $(".listo")
+var combo = $(".combo")
 
+// let cambiar_estado = function(orden){
+//     let nuevo_estado = (orden.attributes['status'].value == true) ? addClass : false
+//      ^^ If en una sola línea representa lo siguiente:
+//      if(status == 1){
+//          new_status = 0
+//      }else{
+//          new_status = 1
+//      }
 
-listo.on("click", function(){
-    console.log("click")
-    socket.emit('nuevo_menu', {
-        'combo': $(".combo").addClass(".alt"), 
-        'bebida': $(".bebida").addClass(".alt"),
-        'acompanamiento': $(".acomp").addClass(".alt")
-    });
-});
+//     $("#"+orden.id).attr('status', new_status)
+//     let admin = {
+//         '_id': orden.id,
+//         'status': new_status,
+//         'name': orden.name
+//     }
+    // $.ajax({
+    //     url: 'http://'+ window.location.host +'/api/admin/'+contenido,
+    //     type: 'PUT',
+    //     data: contenido
+    // });
+    // socket.emit('admin_clicked', orden);
+// }
 
-var contenido = function(url){
-        $.get( url, function( data ) {
-                datos.empty()
+contenido = function(url){
+    $.get( url, function( data ) {
+        datos.empty()
             $.each( data.admin, function( i, orden ) {
-                datos.append(`
-                    <tr>
-                    <th>`+ orden.combo +`</th>
-                    <th>`+ orden.bebida +`</th>
-                    <th>`+ orden.acompanamiento +`</th>
-                    <td><button class="listo">Listo</button> <button class="cancelar">Cancelar</button></td>
-                    </tr>
-                `)
-                
-            })
+            datos.append(`
+                <tr>
+                <th class="combo">`+ orden.combo +`</th>
+                <th>`+ orden.bebida +`</th>
+                <th>`+ orden.acompanamiento +`</th>
+                <td><button class="listo">Listo</button></td>
+                </tr>
+            `)                
         })
-        
-    }
+    listin()
+    })
+}
+
+let listin = function() {
+    let listo = $(".listo")
+    listo.on("click", function(e){
+        console.log("XD")
+        let orden = e.target
+        cambiar_estado(orden)
+    })
+}
+
 contenido('http://'+ window.location.host +'/api/admin')
-</script
+</script>
 </html>
