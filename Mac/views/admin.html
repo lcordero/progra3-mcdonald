@@ -15,6 +15,12 @@
         margin: 8px;
         width: 80px;
         text-align: center;
+        background: black;
+        border-radius: 8px;
+        font-size: 20px;
+    }
+    a {
+        color: yellow
     }
     h1 {
         font-size: 30px;
@@ -27,11 +33,27 @@
     .guardar {
         font-size: 20px;
         margin: 20px;
-        background: chocolate;
+        background: black;
         border-radius: 8px;
+        color: yellow;
+    }
+    body {
+        background-color: yellow;
+    }
+    .comboo {
+        color: red;
+        font-size: 30px;
+    }
+    .bebidaa {
+        color: red;
+        font-size: 30px;
+    }
+    .acompa {
+        color: red;
+        font-size: 30px;
     }
 </style>
-<h1>Agregar Productos</h1>
+<h1>Agregar Orden</h1>
 <hr />
 <input placeholder="Combo" class="combo"> 
 <br>
@@ -44,9 +66,9 @@
     <table style="width:100%" class="datos">
         <thead class="orden">
             <tr>
-                <th>Combo</th>
-                <th>Bebida</th>
-                <th>Acompañamiento</th>
+                <th class="comboo">Combo</th>
+                <th class="bebidaa">Bebida</th>
+                <th class="acompa">Acompañamiento</th>
             </tr>
         </thead>
         <tbody class="cuerpo_t"></tbody>
