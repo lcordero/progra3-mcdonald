@@ -10,16 +10,18 @@
 
     <Style type = "text/css">
       body {
-        background-color: rgb(77, 159, 214);
+        background: yellow;
       }
       * button {
         padding:40px 40px;
         margin: 8px;
         width: 800px;
+        background: black;
       }
-      .ord {
-        color: black;
-
+      .ord, .cocina, .nosotros {
+        color: yellow;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 50px;
       }
       #header {
         margin: 8px;
@@ -42,16 +44,13 @@
     <nav>
         <!--button class ="inicio" href="menu.html">Inicio</button-->
         <button class="agregarmenu">
-          <a class="ord" href="NuevoMenu">Agregar Menu</a>
-        </button>
-        <button class="Menu">
-          <a class="ord" href="menu2">Ordena Aqui</a>
+          <a class="ord" href="admin">Agregar Menu</a>
         </button>
         <button class="Cocina">
-          <a class="ord" href="menu3">Orden</a>
+          <a class="cocina" href="cocina">Cocina</a>
         </button>
         <button class="Nosotros">
-          <a class="ord" href="menu4">Nosotros</a>
+          <a class="nosotros" href="nosotros">Nosotros</a>
         </button>
         
     </nav>

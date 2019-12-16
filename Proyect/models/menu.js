@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 const MacSchema = Schema({
     combo: String,
     bebida: String,
-    acompanamiento: String
-})
+    acompañamiento: String,
+}) 
 
-module.exports = mongoose.model('NuevoMenu', MacSchema)
+module.exports = mongoose.model('Mac', MacSchema)

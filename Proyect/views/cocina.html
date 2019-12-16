@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MACDONALD</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    .inicio {
+        padding:4px 4px;
+        margin: 8px;
+        width: 80px;
+        text-align: center;
+        background: black;
+        border-radius: 8px;
+        font-size: 20px;
+    }
+    body{
+       background: yellow;
+    }
+    .combo {
+        color: red;
+        font-size: 40px;
+    }
+    .bebida {
+        color: red;
+        font-size: 40px;
+    }
+    .acomp {
+        color: red;
+        font-size: 40px;
+    }
+    .cancelar {
+        background: red;
+        font-size: 20px;
+        border-radius: 8px;
+    }
+    .title {
+        text-align: center;
+        color: black;
+    }
+    .com {
+        font-size: 25px;
+    }
+    .beb {
+        font-size: 25px;
+    }
+    .acom {
+        font-size: 25px;
+    }
+    .text {
+        font-size: 25px; 
+    }
+    a {
+        color: yellow
+    }
+</style>
+    <hr/>
+    <button class ="inicio"> 
+        <a class="ordena" href="menu">Inicio</a> 
+    </button>
+    <h1 class="title">Cocina</h1>
+    <hr/>
+
+<div class="contenido">
+    <table style="width:100%" class="datos">
+        <thead class="orden">
+            <tr>
+                <th class="combo">Combo</th>
+                <th class="bebida">Bebida</th>
+                <th class="acomp">Acompañamiento</th>
+            </tr>
+        </thead>
+        <tbody class="cuerpo_t"></tbody>
+    </table>
+</div>
+</head>
+<script src="/assets/jquery.js"></script>
+<script src="/assets/socket.io.js"></script>
+
+<script>
+
+var contenido = $(".contenido")
+var datos = $(".datos")
+var Button = $("button")
+
+var contenido = function(url){
+        $.get( url, function( data ) {
+                // datos.empty()
+            $.each( data.admin, function( i, orden ) {
+                datos.append(`
+                    <tr>
+                    <th class="com">`+ orden.combo +`</th>
+                    <th class="beb">`+ orden.bebida +`</th>
+                    <th class="acom">`+ orden.acompanamiento +`</th>
+                    <td><button class="cancelar">Cancelar</button>
+                    </tr>
+                `)
+            })
+        })
+    }
+    contenido('http://'+ window.location.host +'/api/admin')
+
+</script
+</html>
