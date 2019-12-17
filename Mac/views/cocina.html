@@ -85,23 +85,46 @@
 var contenido = $(".contenido")
 var datos = $(".datos")
 var Button = $("button")
+var cuerpo_t = $(".cuerpo_t")
 
 var contenido = function(url){
         $.get( url, function( data ) {
-                // datos.empty()
-            $.each( data.admin, function( i, orden ) {
-                datos.append(`
+                // cuerpo_t.empty()
+            $.each( data.admin, function( i, cocina ) {
+                cuerpo_t.append(`
                     <tr>
-                    <th class="com">`+ orden.combo +`</th>
-                    <th class="beb">`+ orden.bebida +`</th>
-                    <th class="acom">`+ orden.acompanamiento +`</th>
-                    <td><button class="cancelar">Cancelar</button>
+                    <th class="com">`+ cocina.combo +`</th>
+                    <th class="beb">`+ cocina.bebida +`</th>
+                    <th class="acom">`+ cocina.acompanamiento +`</th>
+                    <td><button class="cancelar" id="`+ cocina._id +`">Cancelar</button>
                     </tr>
                 `)
+                referencia_eliminar()
             })
         })
     }
-    contenido('http://'+ window.location.host +'/api/admin')
 
+    var referencia_eliminar = function(){
+    let btn = $(":button")
+    btn.on("click", function(e){
+       var info = e.target
+       console.log(e.target)
+       
+      elimina_linea(info)
+    })
+}
+var elimina_linea = function(info){
+    let menu_eli= $("#"+info.id).closest('tr').remove()
+    elimina_prod(info)
+}
+
+// funcion de eliminar el menu desde base de datos
+// index.on("click", ".eliminar",
+var elimina_prod = function(info){ 
+    let menu_eli= $.ajax({
+    url: 'http://'+ window.location.host +'/api/admin/'+info.id,
+    type: 'DELETE' })
+    }
+    contenido('http://'+ window.location.host +'/api/admin')
 </script
 </html>
