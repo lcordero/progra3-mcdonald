@@ -27,10 +27,9 @@ mongoose.connect(config.db, (err, res) => {
       client.broadcast.emit('nuevo_menu', admin);
     });
 
-    client.on('message', function(msg) {
-        console.log(msg)
-        client.send(msg);
-        client.broadcast.send(msg);
+    client.on('refresh', function() {
+        client.emit("refresh");
+        client.broadcast.emit("refresh");
     }); 
   
     client.on('disconnect', function() {
