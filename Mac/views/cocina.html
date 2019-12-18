@@ -87,6 +87,25 @@ var datos = $(".datos")
 var Button = $("button")
 var cuerpo_t = $(".cuerpo_t")
 
+
+var socket = io.connect(window.location.host);
+    socket.on('conect', function() {
+        console.log('conectado nuevo menu con socket')
+    });
+
+    socket.on("nuevo_menu", function(cocina){
+        if (!cocina.combo || !cocina.bebida || !cocina.acompanamiento ) return
+        cuerpo_t.append(`
+            <tr>
+            <th class="com">`+ cocina.combo +`</th>
+            <th class="beb">`+ cocina.bebida +`</th>
+            <th class="acom">`+ cocina.acompanamiento +`</th>
+            <td><button class="cancelar" id="`+ cocina._id +`">Cancelar</button>
+            </tr>
+        `)
+    })
+
+
 var contenido = function(url){
         $.get( url, function( data ) {
                 // cuerpo_t.empty()
@@ -115,16 +134,15 @@ var contenido = function(url){
 }
 var elimina_linea = function(info){
     let menu_eli= $("#"+info.id).closest('tr').remove()
-    elimina_prod(info)
+     elimina_prod(info)
 }
 
-// funcion de eliminar el menu desde base de datos
-// index.on("click", ".eliminar",
 var elimina_prod = function(info){ 
-    let menu_eli= $.ajax({
-    url: 'http://'+ window.location.host +'/api/admin/'+info.id,
-    type: 'DELETE' })
-    }
+      let eli_menu = $.ajax({
+      url: 'http://'+ window.location.host +'/api/admin/'+info.id,
+      type: 'DELETE' })
+     }
+
     contenido('http://'+ window.location.host +'/api/admin')
 </script
 </html>

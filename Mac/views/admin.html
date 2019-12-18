@@ -52,6 +52,11 @@
         color: red;
         font-size: 30px;
     }
+    .cancelar {
+        background: red;
+        font-size: 20px;
+        border-radius: 8px;
+    }
 </style>
 <h1>Agregar Orden</h1>
 <hr />
@@ -93,6 +98,7 @@
             <th>`+ admin.combo +`</th>
             <th>`+ admin.bebida +`</th>
             <th>`+ admin.acompanamiento +`</th>
+            <td><button class="cancelar" id="`+ admin._id +`">Cancelar</button>
             </tr>
         `)
     })
@@ -123,15 +129,34 @@
                     <th>`+ admin.combo +`</th>
                     <th>`+ admin.bebida +`</th>
                     <th>`+ admin.acompanamiento +`</th>
+                    <td><button class="cancelar" id="`+ admin._id +`">Cancelar</button>
                     </tr>
                 `)
+                referencia_eliminar()
             })
         })
     }
 
-     
+    var referencia_eliminar = function(){
+    let btn = $(":button")
+    btn.on("click", function(e){
+       var info = e.target
+       console.log(e.target)
+       
+      delete_line(info)
+    })
+}
+    var delete_line = function(info){
+      let eli_menu = $("#"+info.id).closest('tr').remove()
+      elimina_prod(info)
+   }
+
+// funcion de eliminar el menu desde base de datos
+    var elimina_prod = function(info){ 
+      let eli_menu = $.ajax({
+      url: 'http://'+ window.location.host +'/api/admin/'+info.id,
+      type: 'DELETE' })
+     }
         console.log("Get de las ordenes a travez de la BD")
         contenido('http://'+ window.location.host +'/api/admin')
-
-
 </script>
