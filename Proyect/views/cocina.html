@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MACDONALD</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    .inicio {
+        padding:4px 4px;
+        margin: 8px;
+        width: 80px;
+        text-align: center;
+        background: red;
+        border-radius: 8px;
+        font-size: 20px;
+    }
+    body{
+       background: yellow;
+    }
+    .combo {
+        color: red;
+        font-size: 40px;
+    }
+    .bebida {
+        color: red;
+        font-size: 40px;
+    }
+    .acomp {
+        color: red;
+        font-size: 40px;
+    }
+    .cancelar {
+        background: red;
+        font-size: 20px;
+        border-radius: 8px;
+    }
+    .title {
+        text-align: center;
+        color: black;
+    }
+    .com {
+        font-size: 25px;
+    }
+    .beb {
+        font-size: 25px;
+    }
+    .acom {
+        font-size: 25px;
+    }
+    .text {
+        font-size: 25px; 
+    }
+    a {
+        color: yellow
+    }
+</style>
+    <hr/>
+    <button class ="inicio"> 
+        <a class="ordena" href="menu">Inicio</a> 
+    </button>
+    <h1 class="title">Cocina</h1>
+    <hr/>
+
+<div class="contenido">
+    <table style="width:100%" class="datos">
+        <thead class="orden">
+            <tr>
+                <th class="combo">Combo</th>
+                <th class="bebida">Bebida</th>
+                <th class="acomp">Acompañamiento</th>
+            </tr>
+        </thead>
+        <tbody class="cuerpo_t"></tbody>
+    </table>
+</div>
+</head>
+<script src="/assets/jquery.js"></script>
+<script src="/assets/socket.io.js"></script>
+
+<script>
+
+var contenido = $(".contenido")
+var datos = $(".datos")
+var Button = $("button")
+var cuerpo_t = $(".cuerpo_t")
+
+
+var socket = io.connect(window.location.host);
+    socket.on('conect', function() {
+        console.log('conectado nuevo menu con socket')
+    });
+
+    socket.on("nuevo_menu", function(cocina){
+        if (!cocina.combo || !cocina.bebida || !cocina.acompanamiento ) return
+        cuerpo_t.append(`
+            <tr>
+            <th class="com">`+ cocina.combo +`</th>
+            <th class="beb">`+ cocina.bebida +`</th>
+            <th class="acom">`+ cocina.acompanamiento +`</th>
+            <td><button class="cancelar" id="`+ cocina._id +`">Cancelar</button>
+            </tr>
+        `)
+    })
+
+
+
+
+var contenido = function(url){
+        cuerpo_t.empty();
+        $.get( url, function( data ) {
+            $.each( data.admin, function( i, cocina ) {
+                cuerpo_t.append(`
+                    <tr>
+                    <th class="com">`+ cocina.combo +`</th>
+                    <th class="beb">`+ cocina.bebida +`</th>
+                    <th class="acom">`+ cocina.acompanamiento +`</th>
+                    <td><button class="cancelar" id="`+ cocina._id +`">Cancelar</button>
+                    </tr>
+                `)
+                referencia_eliminar();
+            })
+        })
+    }
+
+    var referencia_eliminar = function(){
+    let btn = $(":button")
+    btn.on("click", function(e){
+       var info = e.target;
+       console.log(e.target);
+      elimina_linea(info);
+    })
+}
+var elimina_linea = function(info){
+    let menu_eli= $("#"+info.id).closest('tr').remove();
+     elimina_prod(info);
+}
+
+
+var elimina_prod = function(info){ 
+      let eli_menu = $.ajax({
+      url: 'http://'+ window.location.host +'/api/admin/'+info.id,
+      type: 'DELETE' ,
+      success: function() {
+        socket.emit("refresh");
+        }});
+     }
+
+socket.on("refresh", function(){   
+    console.log("Holaaaaa");
+    contenido('http://'+ window.location.host +'/api/admin');
+})
+
+
+    contenido('http://'+ window.location.host +'/api/admin')
+</script
+</html>
